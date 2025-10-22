@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interaction Guide</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Custom Font: Poppins (for all text) --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Background is now transparent (no background-color set on body) */
+        body {
+            /* Removed background-color: #001A10; to make the overlay transparent */
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Define Custom Font Family */
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Glassmorphism Effect: Opacity adjusted to 30% (0.30) */
+        .glass {
+            background-color: rgba(12, 8, 6, 0.398); 
+            backdrop-filter: blur(8px);  /* Glass effect blur */
+            -webkit-backdrop-filter: blur(8px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Full screen overlay and centering: Positioned ABOVE the background */
+        #help-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        /* --- Animation Keyframes (Retained for visual consistency) --- */
+        @keyframes header-float {
+            0%, 100% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-5px); opacity: 0.95; }
+        }
+        
+        .animate-header-float {
+            animation: header-float 4s ease-in-out infinite alternate;
+        }
+        @keyframes mouse-drag {
+            0% { transform: translateX(0) translateY(0); }
+            10% { transform: translateX(0) translateY(1px); }
+            40% { transform: translateX(10px) translateY(1px); }
+            70% { transform: translateX(-10px) translateY(1px); }
+            90% { transform: translateX(0) translateY(1px); }
+            100% { transform: translateX(0) translateY(0); }
+        }
+        
+        .animate-mouse-pan {
+            animation: mouse-drag 2.5s ease-in-out infinite;
+        }
+        @keyframes click-pulse {
+            0% { transform: scale(0.9); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(0.9); opacity: 1; }
+        }
+
+        .animate-click-pulse {
+            animation: click-pulse 1.5s ease-out infinite;
+        }
+        @keyframes chevron-bob {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+
+        .animate-chevron-bob {
+            animation: chevron-bob 1s ease-in-out infinite alternate;
+        }
+    </style>
+</head>
+<body class="font-poppins">
+
+    <!-- Help Overlay (Full Screen, Dynamic Centering, and Scrollable) --><div id="help-overlay">
+        <!-- Main Glassmorphism Card (Full Screen, Dynamic Centering, and Scrollable) --><div class="glass p-8 md:p-12 w-full h-full max-w-full rounded-none text-white font-poppins flex flex-col items-center justify-center overflow-y-auto">
+            
+            <!-- Content Wrapper: Constrains the width of the text/grid for readability, allows scrolling --><div class="w-full max-w-4xl py-4 flex flex-col items-center">
+
+                <!-- Header - Animated --><h1 class="text-6xl md:text-8xl text-center mb-10 tracking-wider animate-header-float font-medium" style="color: #FFFFFF;">
+                    Welcome to <br> the Sienna Towers 
+                </h1>
+                <p class="text-center text-lg md:text-xl mb-12 opacity-80 font-medium">
+                    A simple guide to navigating this immersive 360° experience.
+                </p>
+
+                <!-- Instructions Grid --><div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                    <!-- 1. Panning Instruction Card --><div class="p-6 bg-white/10 rounded-xl shadow-lg flex flex-col items-center">
+                        <!-- Animated Mouse Icon: Panning (Monochromatic) --><div class="relative w-20 h-20 mb-4 flex justify-center items-center">
+                            <!-- Pulsing background effect --><div class="absolute w-full h-full rounded-full bg-white/10 animate-click-pulse"></div>
+
+                            <!-- Animated Mouse SVG --><svg class="w-14 h-14 text-white z-10 animate-mouse-pan" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+                                <!-- Mouse Body --><path d="M12 1.5C8.41014 1.5 5.5 4.41014 5.5 8V16C5.5 19.5899 8.41014 22.5 12 22.5C15.5899 22.5 18.5 19.5899 18.5 16V8C18.5 4.41014 15.5899 1.5 12 1.5Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <!-- Scroll Wheel / Main Click Indicator - Stays visible as a press point --><path d="M12 2V8" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+
+                        <!-- Title --><h2 class="text-3xl font-medium mb-2 text-white">Pan the View</h2>
+                        <p class="text-center opacity-70 font-medium">
+                            To look around the panorama, simply click and hold your mouse button, then drag it in any direction (or swipe on a touch device).
+                        </p>
+                    </div>
+
+                    <!-- 2. Hotspot Instruction Card --><div class="p-6 bg-white/10 rounded-xl shadow-lg flex flex-col items-center">
+                        <!-- Animated Icon: Hotspot Click (Monochromatic) --><div class="relative w-20 h-20 mb-4 flex justify-center items-center">
+                            <!-- Pulsing background effect (matches mouse card) --><div class="absolute w-full h-full rounded-full bg-white/10 animate-click-pulse"></div>
+
+                            <!-- Hotspot Icon (Inner circle with Chevron) --><div class="w-10 h-10 rounded-full bg-white/90 opacity-90 z-10 border-2 border-white/50 flex items-center justify-center">
+                                <!-- Chevron Icon (Lighter Gray on White for contrast, with new animation) --><svg class="w-5 h-5 text-gray-500 animate-chevron-bob" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Title --><h2 class="text-3xl font-medium mb-2 text-white">Change Location</h2>
+                        <p class="text-center opacity-70 font-medium">
+                            To navigate to a new viewpoint, look for the subtle hotspot circles in the scene and click them.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Experience Tour Button --><button class="mt-16 px-10 py-4 text-xl font-medium bg-white text-gray-900 rounded-full shadow-2xl transition-all duration-300 hover:bg-gray-200 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-white/50">
+                    Experience Tour
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
